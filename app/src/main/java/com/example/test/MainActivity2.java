@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
-    String str;
+    String start = "160000";
+    String toastString = "Please enter a value between 00-81";
+    int duration = Toast.LENGTH_SHORT;
     Button button;
     EditText edit;
 
@@ -28,8 +31,14 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-        str = edit.getText().toString();
-        intent.putExtra("key", str);
-        startActivity(intent);
+        String s = edit.getText().toString();
+        int i = Integer.parseInt(s);
+        if(i <= 81) {
+            intent.putExtra("key", start + s);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(this, toastString, duration).show();
+        }
     }
 }
